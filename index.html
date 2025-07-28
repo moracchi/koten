@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>けんちゃんの個展</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 手書き風フォントをGoogle Fontsから読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1>けんちゃんの個展</h1>
+        <p>未来の画伯、けんちゃんの作品を集めたデジタル美術館</p>
+    </header>
+
+    <main class="gallery-wall">
+        <div class="gallery">
+            <!-- 作品を追加するときは、この<div class="artwork-container">...</div>をコピーして編集します -->
+            <div class="artwork-container" 
+                 data-title="はじめてのたいよう" 
+                 data-date="2024年5月10日 (3歳1ヶ月)" 
+                 data-comment="クレヨンを握って、ぐるぐる描いた初めての作品。力強い線が太陽みたいに見えた日。">
+                
+                <div class="artwork-frame wood-frame">
+                    <img src="images/picture01.jpg" alt="作品1">
+                </div>
+
+                <div class="artwork-plate">
+                    <h3>はじめてのたいよう</h3>
+                    <p>2024.05.10</p>
+                    <div class="plate-tooltip">クレヨンを握って、ぐるぐる描いた初めての作品。力強い線が太陽みたいに見えた日。</div>
+                </div>
+
+                <div class="frame-selector">
+                    <button class="frame-btn" data-frame="wood" title="木の額縁"></button>
+                    <button class="frame-btn" data-frame="gold" title="金の額縁"></button>
+                    <button class="frame-btn" data-frame="pop" title="ポップな額縁"></button>
+                </div>
+            </div>
+
+            <div class="artwork-container" 
+                 data-title="ぞうさん" 
+                 data-date="2024年7月22日 (3歳3ヶ月)" 
+                 data-comment="動物園に行った次の日に描いたぞうさん。長いお鼻が上手に描けました。">
+                
+                 <div class="artwork-frame gold-frame">
+                    <img src="images/picture02.jpg" alt="作品2">
+                </div>
+
+                <div class="artwork-plate">
+                    <h3>ぞうさん</h3>
+                    <p>2024.07.22</p>
+                    <div class="plate-tooltip">動物園に行った次の日に描いたぞうさん。長いお鼻が上手に描けました。</div>
+                </div>
+                
+                <div class="frame-selector">
+                    <button class="frame-btn" data-frame="wood" title="木の額縁"></button>
+                    <button class="frame-btn" data-frame="gold" title="金の額縁"></button>
+                    <button class="frame-btn" data-frame="pop" title="ポップな額縁"></button>
+                </div>
+            </div>
+            <!-- ここに新しい作品を追加していきます -->
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Kenchan's Atelier</p>
+    </footer>
+
+    <!-- 画像をクリックしたときに表示されるモーダル（スポットライト演出） -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img id="modal-image" src="" alt="拡大画像">
+            <h2 id="modal-title"></h2>
+            <p id="modal-date"></p>
+            <p id="modal-comment"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

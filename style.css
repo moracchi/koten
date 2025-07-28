@@ -1,0 +1,214 @@
+/* 基本スタイル */
+body {
+    font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+    margin: 0;
+    color: #333;
+    line-height: 1.7;
+}
+
+/* ヘッダー */
+.site-header {
+    text-align: center;
+    padding: 40px 20px;
+}
+.site-header h1 {
+    font-family: 'Kaisei Decol', serif;
+    font-size: 3rem;
+    color: #5a4a42;
+}
+
+/* NEW: 仮想の壁紙をメインの背景に設定 */
+.gallery-wall {
+    padding: 40px 20px;
+    background-color: #f5f2ed; /* 少し温かみのある壁の色 */
+    background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 20px 20px; /* 壁紙のパターンサイズ */
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 50px 30px;
+}
+
+/* NEW: 作品全体のコンテナ */
+.artwork-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* ツールチップ表示の基準点 */
+}
+
+/* NEW: 額縁のスタイル */
+.artwork-frame {
+    background-color: white;
+    padding: 20px; /* 絵と額縁の間の余白（マット） */
+    border-radius: 3px;
+    /* NEW: 壁に掛かっているような影を演出 */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+.artwork-frame:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+.artwork-frame img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* NEW: 3種類の額縁デザイン */
+.wood-frame {
+    border: 15px solid #855a39;
+    border-image: linear-gradient(135deg, #6b4a2f 0%, #9b7454 100%) 1;
+}
+.gold-frame {
+    border: 15px solid #d4af37;
+    border-image: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #b8860b 100%) 1;
+}
+.pop-frame {
+    border: 15px solid #3498db;
+    border-image: linear-gradient(135deg, #e74c3c, #f1c40f, #2ecc71, #3498db) 1;
+}
+
+/* NEW: 作品プレート */
+.artwork-plate {
+    background: linear-gradient(180deg, #d3c4a4, #c0ae8a);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #a49172;
+    padding: 5px 15px;
+    text-align: center;
+    margin-top: 20px;
+    width: 80%;
+    cursor: default;
+}
+.artwork-plate h3 {
+    font-size: 1em;
+    margin: 0;
+    color: #4a3c2a;
+    font-weight: bold;
+    font-family: 'Times New Roman', serif;
+}
+.artwork-plate p {
+    font-size: 0.8em;
+    margin: 0;
+    color: #6a5c4a;
+}
+
+/* NEW: プレートホバー時に表示されるツールチップ（コメント） */
+.plate-tooltip {
+    position: absolute;
+    bottom: 100%; /* プレートの上に表示 */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: 250px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    pointer-events: none; /* ホバーの邪魔にならないように */
+    z-index: 10;
+}
+.artwork-plate:hover .plate-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* NEW: 額縁セレクター */
+.frame-selector {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+.frame-btn {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.frame-btn:hover {
+    transform: scale(1.1);
+}
+.frame-btn[data-frame="wood"] { background: #855a39; }
+.frame-btn[data-frame="gold"] { background: #d4af37; }
+.frame-btn[data-frame="pop"] { background: linear-gradient(45deg, #e74c3c, #3498db); }
+
+
+/* フッター */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 0.8em;
+    color: #888;
+}
+
+/* モーダルウィンドウ（拡大表示） */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* NEW: スポットライト効果のための暗い背景 */
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex; /* 中央寄せのためにflexを使用 */
+    align-items: center;
+    justify-content: center;
+    /* NEW: フェードイン・アウトのための設定 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+/* NEW: モーダル表示用のクラス */
+.modal.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+.modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 5px;
+    max-width: 80%;
+    max-height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.2); /* ほのかな光彩 */
+}
+#modal-image {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+}
+#modal-title {
+    font-family: 'Kaisei Decol', serif;
+    color: #e67e22;
+    margin-top: 15px;
+}
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #aaa;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-button:hover {
+    color: #000;
+}
